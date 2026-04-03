@@ -3,71 +3,249 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Briefcase, Code2, BarChart3, Home, Zap, Lock, Smartphone, Layers, GitBranch, Cloud, MessageCircle } from "lucide-react";
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  technologies: string[];
+  role: string;
+  type: string;
+  link: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const PROJECTS_DATA: Project[] = [
+  {
+    id: 1,
+    title: "E-Commerce Platform",
+    description: "Full-stack e-commerce platform with real-time inventory management and payment integration.",
+    technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
+    role: "Lead Developer",
+    type: "Client Project",
+    link: "#",
+    icon: Briefcase,
+  },
+  {
+    id: 2,
+    title: "Task Management App",
+    description: "Collaborative task management application with real-time updates and team collaboration features.",
+    technologies: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
+    role: "Full-Stack Developer",
+    type: "Personal Project",
+    link: "#",
+    icon: Code2,
+  },
+  {
+    id: 3,
+    title: "Analytics Dashboard",
+    description: "Real-time analytics dashboard for tracking user engagement and business metrics.",
+    technologies: ["React", "D3.js", "Express", "MongoDB"],
+    role: "Lead Developer",
+    type: "Client Project",
+    link: "#",
+    icon: BarChart3,
+  },
+  {
+    id: 4,
+    title: "Real Estate Platform",
+    description: "Online property marketplace with virtual tours, listing management, and buyer-seller communication.",
+    technologies: ["Vue.js", "Python", "Django", "PostgreSQL"],
+    role: "Full-Stack Developer",
+    type: "Client Project",
+    link: "#",
+    icon: Home,
+  },
+  {
+    id: 5,
+    title: "Social Media Analytics",
+    description: "Advanced analytics tool for tracking social media performance across multiple platforms with AI insights.",
+    technologies: ["React", "Node.js", "TensorFlow", "Redis"],
+    role: "Lead Developer",
+    type: "Startup Project",
+    link: "#",
+    icon: Zap,
+  },
+  {
+    id: 6,
+    title: "AI Chatbot Platform",
+    description: "Conversational AI platform for customer support with Natural Language Processing and machine learning.",
+    technologies: ["Python", "FastAPI", "OpenAI API", "PostgreSQL"],
+    role: "Backend Lead",
+    type: "Startup Project",
+    link: "#",
+    icon: MessageCircle,
+  },
+  {
+    id: 7,
+    title: "Mobile Banking App",
+    description: "Cross-platform mobile banking application with secure transactions and account management.",
+    technologies: ["React Native", "TypeScript", "Spring Boot", "PostgreSQL"],
+    role: "Full-Stack Developer",
+    type: "Client Project",
+    link: "#",
+    icon: Smartphone,
+  },
+  {
+    id: 8,
+    title: "Design System Library",
+    description: "Comprehensive component library and design system documentation for enterprise applications.",
+    technologies: ["React", "TypeScript", "Storybook", "Tailwind CSS"],
+    role: "Lead Developer",
+    type: "Internal Project",
+    link: "#",
+    icon: Layers,
+  },
+  {
+    id: 9,
+    title: "DevOps Automation Pipeline",
+    description: "CI/CD pipeline automation tool with Docker containerization and Kubernetes orchestration.",
+    technologies: ["Python", "Docker", "Kubernetes", "GitHub Actions"],
+    role: "DevOps Engineer",
+    type: "Internal Project",
+    link: "#",
+    icon: GitBranch,
+  },
+  {
+    id: 10,
+    title: "Cloud Infrastructure Manager",
+    description: "Multi-cloud infrastructure management platform with real-time resource monitoring and optimization.",
+    technologies: ["Go", "Terraform", "AWS", "Dashboard UI"],
+    role: "Backend Lead",
+    type: "SaaS Product",
+    link: "#",
+    icon: Cloud,
+  },
+];
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
+  const IconComponent = project.icon;
+
+  return (
+    <Card className="border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 hover:shadow-lg transition overflow-hidden">
+      <div className="bg-slate-300 dark:bg-slate-800 h-48 flex items-center justify-center">
+        <p className="text-slate-500 dark:text-slate-400">Project image</p>
+      </div>
+      <CardHeader>
+        <div className="flex items-center gap-3">
+          <IconComponent className="w-6 h-6 text-slate-600 dark:text-slate-400" />
+          <CardTitle className="text-xl text-slate-900 dark:text-white">{project.title}</CardTitle>
+        </div>
+        <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
+      </CardHeader>
+      <Separator className="bg-slate-200 dark:bg-slate-700" />
+      <CardContent className="pt-4">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{project.role} • {project.type}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <Badge
+              key={tech}
+              className="p-4 text-sm bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+            >
+              {tech}
+            </Badge>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button variant="ghost" className="text-blue-600 hover:text-blue-700 p-0" asChild>
+          <a href={project.link}>View Project →</a>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+interface ProjectsGridProps {
+  projects: Project[];
+}
+
+function ProjectsGrid({ projects }: ProjectsGridProps) {
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  );
+}
+
+interface HorizontalProjectCardProps {
+  project: Project;
+}
+
+function HorizontalProjectCard({ project }: HorizontalProjectCardProps) {
+  const IconComponent = project.icon;
+
+  return (
+    <Card className="rounded-sm border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 hover:shadow-lg transition overflow-hidden flex flex-col md:flex-row">
+      {/* Image Section */}
+      <div className="mx-4 bg-slate-300 dark:bg-slate-800 w-full md:w-48 h-48 md:h-auto flex items-center justify-center shrink-0">
+        <p className="text-slate-500 dark:text-slate-400">Project image</p>
+      </div>
+
+      {/* Content Section */}
+      <div className="flex flex-col grow">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <IconComponent className="w-6 h-6 text-slate-600 dark:text-slate-400" />
+            <CardTitle className="text-xl text-slate-900 dark:text-white">{project.title}</CardTitle>
+          </div>
+          <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
+        </CardHeader>
+        <Separator className="bg-slate-200 dark:bg-slate-700" />
+        <CardContent className="pt-4 grow">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{project.role} • {project.type}</p>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <Badge
+                key={tech}
+                className="p-2 text-xs bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button variant="ghost" className="text-blue-600 hover:text-blue-700 p-0" asChild>
+            <a href={project.link}>View Project →</a>
+          </Button>
+        </CardFooter>
+      </div>
+    </Card>
+  );
+}
+
+interface ProjectsListProps {
+  projects: Project[];
+}
+
+function ProjectsList({ projects }: ProjectsListProps) {
+  return (
+    <div className="space-y-6">
+      {projects.map((project) => (
+        <HorizontalProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  );
+}
 
 export default function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce platform with real-time inventory management and payment integration.",
-      technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
-      role: "Lead Developer",
-      type: "Client Project",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "Collaborative task management application with real-time updates and team collaboration features.",
-      technologies: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
-      role: "Full-Stack Developer",
-      type: "Personal Project",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "Analytics Dashboard",
-      description: "Real-time analytics dashboard for tracking user engagement and business metrics.",
-      technologies: ["React", "D3.js", "Express", "MongoDB"],
-      role: "Lead Developer",
-      type: "Client Project",
-      link: "#",
-    },
-  ];
-
   return (
     <section className="py-20 px-4 bg-white dark:bg-black">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold mb-12 text-center text-slate-900 dark:text-white">Featured Projects</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <Card key={project.id} className="hover:shadow-lg transition overflow-hidden dark:border-slate-700">
-              <div className="bg-slate-300 dark:bg-slate-800 h-48 flex items-center justify-center">
-                <p className="text-slate-500 dark:text-slate-400">Project image</p>
-              </div>
-              <CardHeader>
-                <CardTitle className="text-xl dark:text-white">{project.title}</CardTitle>
-                <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{project.role} • {project.type}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <Badge key={tech} variant="outline">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="ghost" className="text-blue-600 hover:text-blue-700 p-0" asChild>
-                  <a href={project.link}>View Project →</a>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <ProjectsGrid projects={PROJECTS_DATA.slice(0, 3)} />
       </div>
     </section>
   );
 }
+
+export { ProjectsList };

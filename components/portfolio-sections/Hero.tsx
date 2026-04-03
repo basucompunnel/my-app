@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -45,22 +46,26 @@ export default function Hero() {
           Senior Full-Stack Developer | Building scalable web experiences
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <Button
-            size="lg"
-            className="rounded-sm px-8 text-base"
-            // className="rounded-sm px-8 text-base bg-slate-900 dark:bg-white text-white dark:text-black hover:bg-slate-800 dark:hover:bg-slate-100"
-          >
-            View My Work
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="rounded-sm px-8 text-base"
+          <Link href="/projects">
+            <Button
+              size="lg"
+              className="rounded-sm px-8 text-base"
+              // className="rounded-sm px-8 text-base bg-slate-900 dark:bg-white text-white dark:text-black hover:bg-slate-800 dark:hover:bg-slate-100"
+            >
+              View My Work
+            </Button>
+          </Link>
+          <Link href="mailto:contact@example.com">
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-sm px-8 text-base"
 
-            // className="rounded-sm px-8 text-base border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900/10 dark:hover:bg-white/10"
-          >
-            Get in Touch
-          </Button>
+              // className="rounded-sm px-8 text-base border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900/10 dark:hover:bg-white/10"
+            >
+              Get in Touch
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

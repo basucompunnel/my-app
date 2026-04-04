@@ -2,7 +2,7 @@
 
 export default function ProjectsHeader() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 md:py-16">
+    <div className="max-w-5xl mx-auto px-4 py-12 md:pt-16">
       <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black dark:text-white">
         My Projects
       </h1>

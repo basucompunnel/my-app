@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
@@ -24,7 +25,9 @@ export function Header() {
     return (
       <header className="sticky top-0 z-50 border-b border-border bg-white dark:bg-black">
         <div className="flex items-center justify-between px-4 py-3">
-          <h1 className="text-xl font-semibold">Portfolio</h1>
+          <Link href="/" className="text-xl font-semibold hover:opacity-75 transition">
+            Portfolio
+          </Link>
           <div className="w-8 h-8" />
         </div>
       </header>
@@ -33,8 +36,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white dark:bg-black">
-      <div className="flex items-center justify-between h-16 max-w-5xl mx-auto">
-        <h1 className="text-xl font-semibold">Portfolio</h1>
+      <div className="flex items-center justify-between h-16 max-w-5xl mx-auto px-4">
+        <Link href="/" className="text-xl font-semibold hover:opacity-75 transition">
+          Portfolio
+        </Link>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
